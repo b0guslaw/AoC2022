@@ -18,6 +18,11 @@ FetchContent_MakeAvailable(fmt)
 find_package(Threads REQUIRED)
 
 add_executable(aoc-cpp main.cpp)
+
+if (UNIX) 
+  target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror)
+endif()
+
 target_link_libraries(aoc-cpp
                     fmt::fmt 
                     Threads::Threads)
