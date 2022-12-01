@@ -41,5 +41,5 @@ void DayRunner(F1 f1, F2 f2, const std::vector<T>& data) {
 }
 
 int main() {
-    DayRunner<int>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetData<int>(INPUT_PATH + "day1.txt", '\n'));
+    DayRunner<std::string>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetStringData(INPUT_PATH + "day1.txt"));
 }
