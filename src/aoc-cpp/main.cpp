@@ -24,11 +24,11 @@ auto print = [](const uint64_t part1, double elapsed1, const uint64_t part2, dou
 
 template<typename F, typename I>
 std::tuple<uint64_t, double> Runner(F func, const std::vector<I> input) {
-		auto start = std::chrono::high_resolution_clock::now();
-		uint64_t result = func(input);
-		auto end = std::chrono::high_resolution_clock::now();
-		auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
-		return std::make_tuple(result, elapsed);
+    auto start = std::chrono::high_resolution_clock::now();
+    uint64_t result = func(input);
+    auto end = std::chrono::high_resolution_clock::now();
+    auto elapsed = std::chrono::duration_cast<std::chrono::microseconds>(end - start).count();
+    return std::make_tuple(result, elapsed);
 }
 
 template<typename T, typename F1, typename F2>
@@ -41,5 +41,5 @@ void DayRunner(F1 f1, F2 f2, const std::vector<T>& data) {
 }
 
 int main() {
-    DayRunner<std::string>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetStringData(INPUT_PATH + "day1.txt"));
+    DayRunner<std::int64_t>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetIntData(INPUT_PATH + "day1.txt"));
 }

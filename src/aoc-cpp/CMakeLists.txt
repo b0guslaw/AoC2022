@@ -20,7 +20,7 @@ find_package(Threads REQUIRED)
 add_executable(aoc-cpp main.cpp)
 
 if (UNIX) 
-  target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror)
+  target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror -O3)
 endif()
 
 target_link_libraries(aoc-cpp

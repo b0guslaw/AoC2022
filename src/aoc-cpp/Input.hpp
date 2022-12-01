@@ -1,5 +1,6 @@
 #pragma once
 
+#include <exception>
 #include <iostream>
 #include <sstream>
 #include <fstream>
@@ -69,9 +70,35 @@ namespace Input
 	 */
 	std::vector<std::string> GetStringData(const std::string& path){
 		std::vector<std::string> data;
-		std::ifstream infile(path);
-		for(std::string line; std::getline(infile, line); ) {
-			data.push_back(line);
+		try {
+			std::ifstream infile(path);
+			for(std::string line; std::getline(infile, line); ) {
+				data.push_back(line);
+			}
+		} catch (std::exception& e) {
+			std::cout << e.what() << "\n";
+		}
+		return data;
+	}
+
+	/**
+	 * @brief Reads each line of an input file into an std::vector<int64_t>
+	 * @param path 
+	 * @return std::vector<std::int64_t> 
+	 */
+	std::vector<std::int64_t> GetIntData(const std::string& path){
+		std::vector<std::int64_t> data;
+		try {
+			std::ifstream infile(path);
+			for(std::string line; std::getline(infile, line); ) {
+				if (line.empty()) {
+					data.push_back(0);
+				} else {
+					data.push_back(std::stoll(line));
+				}
+			}
+		} catch (std::exception& e) {
+			std::cout << e.what() << "\n";
 		}
 		return data;
 	}

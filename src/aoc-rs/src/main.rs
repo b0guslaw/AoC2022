@@ -25,9 +25,10 @@ fn day1_part2(input: &str) {
             sum = 0;
         }
     }
+    max.push(sum);
     max.sort();
-    let sz = max.len();
-    println!("Day 1 Part 2: {}", max[sz - 1] + max[sz - 2] + max[sz - 3]);
+    let sum: u64 = max.iter().skip(max.len() - 3).sum();
+    println!("Day 1 Part 2: {}", sum);
 }
 
 fn main() {
