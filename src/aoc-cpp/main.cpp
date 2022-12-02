@@ -10,6 +10,7 @@
 #include "Input.hpp"
 
 #include "days/day1.hpp"
+#include "days/day2.hpp"
 
 const std::string INPUT_PATH{"res/"};
 
@@ -41,5 +42,5 @@ void DayRunner(F1 f1, F2 f2, const std::vector<T>& data) {
 }
 
 int main() {
-    DayRunner<std::int64_t>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetIntData(INPUT_PATH + "day1.txt"));
+    DayRunner<std::string>(aoc::Day2::Part1, aoc::Day2::Part2, Input::GetStringData(INPUT_PATH + "day2.txt"));
 }
