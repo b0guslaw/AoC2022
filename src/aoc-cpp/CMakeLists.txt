@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.0.0)
+cmake_minimum_required(VERSION 3.25)
 project(aoc-cpp VERSION 0.1.0)
 
 include(FetchContent)
@@ -21,6 +21,10 @@ add_executable(aoc-cpp main.cpp)
 
 if (UNIX) 
   target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror -O3)
+endif()
+
+if (BUILD_PROFILE)
+  add_subdirectory(profile)
 endif()
 
 target_link_libraries(aoc-cpp
