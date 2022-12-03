@@ -1,5 +1,6 @@
 #include "../days/day1.hpp"
 #include "../days/day2.hpp"
+#include "../days/day3.hpp"
 
 #include "../Input.hpp"
 
@@ -23,8 +24,16 @@ static void BM_Day2(benchmark::State& state) {
     }
 }
 
+static void BM_Day3(benchmark::State& state) {
+    auto input = Input::GetStringData(INPUT_PATH + "day3.txt");
+    for (auto _: state) {
+        benchmark::DoNotOptimize(aoc::Day3::Part1(input));
+        benchmark::DoNotOptimize(aoc::Day3::Part2(input));
+    }
+}
 
 BENCHMARK(BM_Day1);
 BENCHMARK(BM_Day2);
+BENCHMARK(BM_Day3);
 
 BENCHMARK_MAIN();
