@@ -1,6 +1,7 @@
 #include "../days/day1.hpp"
 #include "../days/day2.hpp"
 #include "../days/day3.hpp"
+#include "../days/day4.hpp"
 
 #include "../Input.hpp"
 
@@ -8,53 +9,41 @@
 
 const std::string INPUT_PATH{"../res/"};
 
-static void BM_Day1_Part1(benchmark::State& state) {
+static void BM_Day1(benchmark::State& state) {
     auto input = Input::GetIntData(INPUT_PATH + "day1.txt");
     for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day1::Part1(input));
-    }
-}
-
-static void BM_Day1_Part2(benchmark::State& state) {
-    auto input = Input::GetIntData(INPUT_PATH + "day1.txt");
-    for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day1::Part2(input));
     }
 }
 
-static void BM_Day2_Part1(benchmark::State& state) {
+static void BM_Day2(benchmark::State& state) {
     auto input = Input::GetStringData(INPUT_PATH + "day2.txt");
     for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day2::Part1(input));
-    }
-}
-
-static void BM_Day2_Part2(benchmark::State& state) {
-    auto input = Input::GetStringData(INPUT_PATH + "day2.txt");
-    for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day2::Part2(input));
     }
 }
 
-static void BM_Day3_Part1(benchmark::State& state) {
+static void BM_Day3(benchmark::State& state) {
     auto input = Input::GetStringData(INPUT_PATH + "day3.txt");
     for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day3::Part1(input));
-    }
-}
-
-static void BM_Day3_Part2(benchmark::State& state) {
-    auto input = Input::GetStringData(INPUT_PATH + "day3.txt");
-    for (auto _: state) {
         benchmark::DoNotOptimize(aoc::Day3::Part2(input));
     }
 }
 
-BENCHMARK(BM_Day1_Part1);
-BENCHMARK(BM_Day1_Part2);
-BENCHMARK(BM_Day2_Part1);
-BENCHMARK(BM_Day2_Part2);
-BENCHMARK(BM_Day3_Part1);
-BENCHMARK(BM_Day3_Part2);
+static void BM_Day4(benchmark::State& state) {
+    auto input = Input::GetStringData(INPUT_PATH + "day4.txt");
+    for (auto _: state) {
+        benchmark::DoNotOptimize(aoc::Day4::Part1(input));
+        benchmark::DoNotOptimize(aoc::Day4::Part2(input));
+    }
+}
+
+BENCHMARK(BM_Day1);
+BENCHMARK(BM_Day2);
+BENCHMARK(BM_Day3);
+BENCHMARK(BM_Day4);
 
 BENCHMARK_MAIN();
