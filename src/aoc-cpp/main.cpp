@@ -13,6 +13,7 @@
 #include "days/day1.hpp"
 #include "days/day2.hpp"
 #include "days/day3.hpp"
+#include "days/day4.hpp"
 
 const std::string INPUT_PATH{"res/"};
 uint64_t day_count{0};
@@ -47,4 +48,5 @@ int main() {
     DayRunner<std::int64_t>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetIntData(INPUT_PATH + "day1.txt"));
     DayRunner<std::string>(aoc::Day2::Part1, aoc::Day2::Part2, Input::GetStringData(INPUT_PATH + "day2.txt"));
     DayRunner<std::string>(aoc::Day3::Part1, aoc::Day3::Part2, Input::GetStringData(INPUT_PATH + "day3.txt"));
+    DayRunner<std::string>(aoc::Day4::Part1, aoc::Day4::Part2, Input::GetStringData(INPUT_PATH + "day4.txt"));
 }
