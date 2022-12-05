@@ -11,8 +11,8 @@
 namespace aoc {
 namespace Day5 {
 
-std::vector<std::stack<char>> get_stacks(const std::vector<std::string>& data) {
-	std::vector<std::stack<char>> slots{9};
+inline std::vector<std::stack<char>> get_stacks(const std::vector<std::string>& data) {
+	std::vector<std::stack<char>> slots{300};
 	auto ground = data.begin();
 	for (auto it = data.begin(); !it->empty(); it++) {
 		ground = it;
@@ -28,34 +28,26 @@ std::vector<std::stack<char>> get_stacks(const std::vector<std::string>& data) {
 			}
 			idx++;
 		}
-		if (ground == data.begin()) {
+		if (ground != data.begin()) {
+			--ground;
+		} else {
 			break;
-		}
-		--ground;
+		}	
 	}
 	return slots;
 }
 
-std::array<int, 3> get_command(const std::string& line) {
+inline std::array<int, 3> get_command(const std::string& line) {
 	std::istringstream iss{line};
-	std::string buffer;
-	int pos{0};
+	static std::string m_discard, f_discard, t_discard;
 
 	int amount{0};
 	int from{0};
 	int to{0};
-	while (iss >> buffer) {
-		if (pos == 1) {
-			amount = std::stoi(buffer);
-		}
-		if (pos == 3) {
-			from = std::stoi(buffer);
-		}
-		if (pos == 5) {
-			to = std::stoi(buffer);
-		}
-		++pos;
-	}
+
+	iss >> m_discard >> amount
+		>> f_discard >> from
+		>> t_discard >> to;
 
 	return std::array<int, 3>{amount, from - 1, to - 1};
 }
@@ -68,12 +60,10 @@ std::string Part1([[maybe_unused]] const std::vector<std::string>& data) {
 	while (!instruction_start->empty()) {
 		instruction_start++;
 	}
-
 	for (auto it = instruction_start + 1; it != data.end(); it++) {
         if (it->empty()) {
             break;
         }
-
 		auto command = get_command(*it);
 		for (int i{0}; i < command[0]; i++) {
 			auto crate = slots[command[1]].top();
