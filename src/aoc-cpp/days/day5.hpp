@@ -1,29 +1,22 @@
 #pragma once
 
 #include <cstdint>
-#include <numeric>
+#include <array>
 #include <vector>
 #include <iostream>
 #include <string>
 #include <stack>
 #include <sstream>
 
-#include <fmt/core.h>
-
 namespace aoc {
 namespace Day5 {
 
-std::string Part1([[maybe_unused]] const std::vector<std::string>& data) {
+std::vector<std::stack<char>> get_stacks(const std::vector<std::string>& data) {
 	std::vector<std::stack<char>> slots{9};
-	std::string result{};
-	auto instruction_start = data.begin();
 	auto ground = data.begin();
-
 	for (auto it = data.begin(); !it->empty(); it++) {
-		instruction_start = it;
 		ground = it;
 	}
-	instruction_start += 2;
 	ground--;
 
 	while (true) {
@@ -40,35 +33,52 @@ std::string Part1([[maybe_unused]] const std::vector<std::string>& data) {
 		}
 		--ground;
 	}
+	return slots;
+}
 
-	for (auto it = instruction_start; it != data.end(); it++) {
+std::array<int, 3> get_command(const std::string& line) {
+	std::istringstream iss{line};
+	std::string buffer;
+	int pos{0};
+
+	int amount{0};
+	int from{0};
+	int to{0};
+	while (iss >> buffer) {
+		if (pos == 1) {
+			amount = std::stoi(buffer);
+		}
+		if (pos == 3) {
+			from = std::stoi(buffer);
+		}
+		if (pos == 5) {
+			to = std::stoi(buffer);
+		}
+		++pos;
+	}
+
+	return std::array<int, 3>{amount, from - 1, to - 1};
+}
+
+std::string Part1([[maybe_unused]] const std::vector<std::string>& data) {
+	std::string result{};
+	auto slots = get_stacks(data);
+
+	auto instruction_start = data.begin();
+	while (!instruction_start->empty()) {
+		instruction_start++;
+	}
+
+	for (auto it = instruction_start + 1; it != data.end(); it++) {
         if (it->empty()) {
             break;
         }
-		std::istringstream iss{*it};
-		std::string buffer;
-		int pos{0};
 
-		size_t amount{0};
-		int from{0};
-		int to{0};
-		while (iss >> buffer) {
-			if (pos == 1) {
-				amount = std::stoi(buffer);
-			}
-			if (pos == 3) {
-				from = std::stoi(buffer);
-			}
-			if (pos == 5) {
-				to = std::stoi(buffer);
-			}
-			++pos;
-		}
-		
-		for (size_t i{0}; i < amount; i++) {
-			auto crate = slots[from - 1].top();
-			slots[from - 1].pop();
-			slots[to - 1].push(crate);
+		auto command = get_command(*it);
+		for (int i{0}; i < command[0]; i++) {
+			auto crate = slots[command[1]].top();
+			slots[command[1]].pop();
+			slots[command[2]].push(crate);
 		}
 	}
 
@@ -81,67 +91,29 @@ std::string Part1([[maybe_unused]] const std::vector<std::string>& data) {
 }
 
 std::string Part2([[maybe_unused]] const std::vector<std::string>& data) {
-	std::vector<std::stack<char>> slots{9};
 	std::string result{};
+	auto slots = get_stacks(data);
+
 	auto instruction_start = data.begin();
-	auto ground = data.begin();
-
-	for (auto it = data.begin(); !it->empty(); it++) {
-		instruction_start = it;
-		ground = it;
-	}
-	instruction_start += 2;
-	ground--;
-
-	while (true) {
-		size_t idx{0};
-		for (size_t i{1}; i < ground->size(); i += 4) {
-			char value = ground->at(i);
-			if (value != ' ') {
-				slots[idx].push(value);
-			}
-			idx++;
-		}
-		if (ground == data.begin()) {
-			break;
-		}
-		--ground;
+	while (!instruction_start->empty()) {
+		instruction_start++;
 	}
 
-	for (auto it = instruction_start; it != data.end(); it++) {
+	for (auto it = instruction_start + 1; it != data.end(); it++) {
         if (it->empty()) {
             break;
         }
-		std::istringstream iss{*it};
-		std::string buffer;
-		int pos{0};
-
-		size_t amount{0};
-		int from{0};
-		int to{0};
-		while (iss >> buffer) {
-			if (pos == 1) {
-				amount = std::stoi(buffer);
-			}
-			if (pos == 3) {
-				from = std::stoi(buffer);
-			}
-			if (pos == 5) {
-				to = std::stoi(buffer);
-			}
-			++pos;
-		}
-		
+		auto command = get_command(*it);
 		std::stack<char> temp;
-		for (size_t i{0}; i < amount; i++) {
-			auto crate = slots[from - 1].top();
-			slots[from - 1].pop();
+		for (int i{0}; i < command[0]; i++) {
+			auto crate = slots[command[1]].top();
+			slots[command[1]].pop();
 			temp.push(crate);
 		}
 		while(!temp.empty()) {
 			auto crate = temp.top();
 			temp.pop();
-			slots[to - 1].push(crate);
+			slots[command[2]].push(crate);
 		}
 	}
 

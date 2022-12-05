@@ -2,6 +2,7 @@
 #include "../days/day2.hpp"
 #include "../days/day3.hpp"
 #include "../days/day4.hpp"
+#include "../days/day5.hpp"
 
 #include "../Input.hpp"
 
@@ -41,9 +42,18 @@ static void BM_Day4(benchmark::State& state) {
     }
 }
 
+static void BM_Day5(benchmark::State& state) {
+    auto input = Input::GetStringData(INPUT_PATH + "day5.txt");
+    for (auto _: state) {
+        benchmark::DoNotOptimize(aoc::Day5::Part1(input));
+        benchmark::DoNotOptimize(aoc::Day5::Part2(input));
+    }
+}
+
 BENCHMARK(BM_Day1);
 BENCHMARK(BM_Day2);
 BENCHMARK(BM_Day3);
 BENCHMARK(BM_Day4);
+BENCHMARK(BM_Day5);
 
 BENCHMARK_MAIN();
