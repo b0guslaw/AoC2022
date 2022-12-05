@@ -4,6 +4,7 @@
 #include <string>
 #include <chrono>
 #include <tuple>
+#include <functional>
 
 #include <fmt/core.h>
 #include <fmt/color.h>
@@ -14,6 +15,7 @@
 #include "days/day2.hpp"
 #include "days/day3.hpp"
 #include "days/day4.hpp"
+#include "days/day5.hpp"
 
 const std::string INPUT_PATH{"res/"};
 uint64_t day_count{0};
@@ -44,9 +46,31 @@ void DayRunner(F1 f1, F2 f2, const std::vector<T>& data) {
 	print(result1, elapsed1, result2, elapsed2);
 }
 
+void Day5_Runner(const std::vector<std::string>& data) {
+    auto sprint = [](const std::string solution, double elapsed, int part){
+        fmt::print(fmt::emphasis::bold,
+            "\tPart {}: {} finished after {}us\n", part, solution, elapsed
+        );
+    };
+
+    fmt::print("Day {} results:\n" , ++day_count);
+
+    auto start1 = std::chrono::high_resolution_clock::now();
+    std::string result1 = aoc::Day5::Part1(data);
+    auto end1 = std::chrono::high_resolution_clock::now();
+    auto start2 = std::chrono::high_resolution_clock::now();
+    std::string result2 = aoc::Day5::Part2(data);
+    auto end2 = std::chrono::high_resolution_clock::now();
+    double elapsed1 = std::chrono::duration_cast<std::chrono::microseconds>(end1 - start1).count();
+    double elapsed2 = std::chrono::duration_cast<std::chrono::microseconds>(end2 - start2).count();
+    sprint(result1, elapsed1, 1);
+    sprint(result2, elapsed2, 2);
+}
+
 int main() {
     DayRunner<std::int64_t>(aoc::Day1::Part1, aoc::Day1::Part2, Input::GetIntData(INPUT_PATH + "day1.txt"));
     DayRunner<std::string>(aoc::Day2::Part1, aoc::Day2::Part2, Input::GetStringData(INPUT_PATH + "day2.txt"));
     DayRunner<std::string>(aoc::Day3::Part1, aoc::Day3::Part2, Input::GetStringData(INPUT_PATH + "day3.txt"));
     DayRunner<std::string>(aoc::Day4::Part1, aoc::Day4::Part2, Input::GetStringData(INPUT_PATH + "day4.txt"));
+    Day5_Runner(Input::GetStringData(INPUT_PATH + "day5.txt"));
 }
