@@ -21,9 +21,7 @@ find_package(Threads REQUIRED)
 
 add_executable(aoc-cpp main.cpp)
 
-if (UNIX) 
-  target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror -O3)
-endif()
+target_compile_options(aoc-cpp PRIVATE -Wall -Wextra -Wpedantic -Werror -O3)
 
 if (BUILD_PROFILE)
   add_subdirectory(profile)
