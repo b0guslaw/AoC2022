@@ -82,6 +82,18 @@ namespace Input
 	}
 
 	/**
+	 * @brief Reads the entire file into a string
+	 * @param path 
+	 * @return std::string
+	 */
+	std::string GetString(const std::string& path){
+		std::ifstream ifs(path);
+		std::string data((std::istreambuf_iterator<char>(ifs)),
+                 std::istreambuf_iterator<char>());
+		return data;
+	}
+
+	/**
 	 * @brief Reads each line of an input file into an std::vector<int64_t>
 	 * @param path 
 	 * @return std::vector<std::int64_t> 

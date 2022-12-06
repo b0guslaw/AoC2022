@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.20)
 project(aoc-cpp VERSION 0.1.0)
 
+SET(CMAKE_CONFIGURATION_TYPES ${CMAKE_BUILD_TYPE} CACHE STRING "" FORCE)
+
 include(FetchContent)
 
 set(CMAKE_CXX_STANDARD 20)
