@@ -38,6 +38,31 @@ namespace Input
 	}
 
 	/**
+	 * @brief Opens a file and reads the contents based on the delimiter to an std::vector
+	 * @tparam T 
+	 * @param path 
+	 * @param delim 
+	 * @return std::vector<T> 
+	 */
+	std::vector<std::vector<int>> GetGrid(const std::string& path) {
+		std::vector<std::vector<int>> data;
+		try {
+			std::ifstream infile(path);
+			std::string line;
+			while(std::getline(infile, line)) {
+				std::vector<int> temp;
+				for (size_t j{0}; j < line.length(); j++) {
+					temp.push_back(line[j] - '0');
+				}
+				data.push_back(temp);
+			}
+		} catch (...) {
+			std::cout << "An error occured!\n";
+		}
+		return data;
+	}
+
+	/**
 	 * @brief Special case of GetStringData which considers the input to have empty lines.
 	 * The input file will be treated as strings, where each line is stored as element
 	 * in an std::vector
