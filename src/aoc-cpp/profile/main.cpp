@@ -5,6 +5,7 @@
 #include "../days/day5.hpp"
 #include "../days/day6.hpp"
 #include "../days/day7.hpp"
+#include "../days/day8.hpp"
 
 #include "../Input.hpp"
 
@@ -68,6 +69,14 @@ static void BM_Day7(benchmark::State& state) {
     }
 }
 
+static void BM_Day8(benchmark::State& state) {
+    auto input = Input::GetGrid(INPUT_PATH + "day8.txt");
+    for (auto _: state) {
+        benchmark::DoNotOptimize(aoc::Day8::Part1(input));
+        benchmark::DoNotOptimize(aoc::Day8::Part2(input));
+    }
+}
+
 BENCHMARK(BM_Day1);
 BENCHMARK(BM_Day2);
 BENCHMARK(BM_Day3);
@@ -75,5 +84,6 @@ BENCHMARK(BM_Day4);
 BENCHMARK(BM_Day5);
 BENCHMARK(BM_Day6);
 BENCHMARK(BM_Day7);
+BENCHMARK(BM_Day8);
 
 BENCHMARK_MAIN();
