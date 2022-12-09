@@ -35,8 +35,8 @@ std::tuple<R, double> Executor(F func, const T& data) {
 
 template<typename T, typename R, typename F1, typename F2>
 void Execute(F1 f1, F2 f2, const T& data) {
-  	auto [result1, elapsed1] = Executor<T, R>(f1, data);
-	auto [result2, elapsed2] = Executor<T, R>(f2, data);
+    auto [result1, elapsed1] = Executor<T, R>(f1, data);
+    auto [result2, elapsed2] = Executor<T, R>(f2, data);
     fmt::print("Day {} results:\n" , ++day_count);
 	    fmt::print(fmt::emphasis::bold,
         "\tPart 1: {} finished after {}us\n", result1, elapsed1
