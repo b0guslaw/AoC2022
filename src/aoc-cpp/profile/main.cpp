@@ -78,6 +78,14 @@ static void BM_Day8(benchmark::State& state) {
     }
 }
 
+static void BM_Day9(benchmark::State& state) {
+    auto input = Input::GetStringData(INPUT_PATH + "day9.txt");
+    for (auto _: state) {
+        benchmark::DoNotOptimize(aoc::Day9::Part1(input));
+        benchmark::DoNotOptimize(aoc::Day9::Part2(input));
+    }
+}
+
 BENCHMARK(BM_Day1);
 BENCHMARK(BM_Day2);
 BENCHMARK(BM_Day3);
@@ -86,5 +94,6 @@ BENCHMARK(BM_Day5);
 BENCHMARK(BM_Day6);
 BENCHMARK(BM_Day7);
 BENCHMARK(BM_Day8);
+BENCHMARK(BM_Day9);
 
 BENCHMARK_MAIN();
