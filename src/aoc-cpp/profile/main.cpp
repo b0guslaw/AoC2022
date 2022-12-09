@@ -6,6 +6,7 @@
 #include "../days/day6.hpp"
 #include "../days/day7.hpp"
 #include "../days/day8.hpp"
+#include "../days/day9.hpp"
 
 #include "../Input.hpp"
 
