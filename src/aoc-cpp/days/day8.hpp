@@ -1,6 +1,7 @@
 #pragma once
 
 #include <cstdint>
+#include <limits>
 #include <numeric>
 #include <vector>
 #include <algorithm>
